@@ -1,18 +1,21 @@
-import sqlite3
 import os
+import psycopg2
+from dotenv import load_dotenv
 
-# DB ko file ke apne folder ke sath rakho (relative path safe)
-DB_PATH = os.path.join(os.path.dirname(__file__), "chatbot.db")
-conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+load_dotenv()
+
+# Neon Postgres connection string (DATABASE_URL env se aati hai)
+DATABASE_URL = os.getenv("DATABASE_URL")
+conn = psycopg2.connect(DATABASE_URL)
+conn.autocommit = True  # har query foran save ho
 
 cursor = conn.cursor()
 
+# Postgres mein AUTOINCREMENT ki jagah SERIAL hota hai
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS chat_history (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     question TEXT,
     answer TEXT
 )
 """)
-
-conn.commit()

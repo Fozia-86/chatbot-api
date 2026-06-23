@@ -4,3 +4,4 @@ google-genai
 rapidfuzz
 python-dotenv
 pydantic
+psycopg2-binary

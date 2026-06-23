@@ -110,7 +110,7 @@ async def ask_bot(query: UserQuery):
 
     # --- History Update (DB) ---
     cursor.execute(
-        "INSERT INTO chat_history (question, answer) VALUES (?, ?)",
+        "INSERT INTO chat_history (question, answer) VALUES (%s, %s)",
         (user_q, answer)
     )
     conn.commit()

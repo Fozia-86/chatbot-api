@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+google-genai
+rapidfuzz
+python-dotenv
+pydantic
